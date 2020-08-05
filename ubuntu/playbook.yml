@@ -1,0 +1,10 @@
+---
+- hosts: web
+  remote_user: app
+  become: yes
+  vars:
+    - working_dir: /home/app
+    - owner: app
+    - group: app
+  roles:
+    - common
