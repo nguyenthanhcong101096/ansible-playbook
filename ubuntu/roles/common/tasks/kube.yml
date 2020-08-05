@@ -28,3 +28,12 @@
     name: kubectl
     state: present
     force: yes
+
+- name: create .kube directory
+  file:
+    path: "{{ working_dir }}/.kube"
+    state: directory
+    mode: 0755
+
+- name: copy file config kube
+  copy: src=templates/kube/config dest="{{ working_dir }}/.kube"

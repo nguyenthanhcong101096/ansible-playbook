@@ -5,6 +5,7 @@
     - postgresql 
     - postgresql-contrib
     - python-psycopg2
+    - python
     - libpq-dev
 
 - name: enable and start postgresql
