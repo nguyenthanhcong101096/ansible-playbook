@@ -1,0 +1,19 @@
+---
+  #machine
+  my_ssh: /Users/mfv-computer-0027/.ssh
+  my_kube: /Users/mfv-computer-0027/.kube
+
+  #common
+  working_dir: /home/ec2
+  group: ec2
+  owner: ec2
+  password: password
+
+  #ruby
+  rbenv_root: /home/ec2/.rbenv
+  ruby_version: 2.7.1
+
+  #postgres
+  pg_database_name: example
+  pg_database_user: root
+  pg_database_pass: password

@@ -1,0 +1,30 @@
+---
+- name: upgrade all packages to the latest version
+  apt: name="*" state=latest
+
+- name: install the software-properties-common Package
+  apt: name=software-properties-common state=present
+
+- name: install a few prerequisite packages 
+  apt: name={{ item }} state=present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+- name: add the GPG key for the official Docker
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+- name: add the Docker repository to APT sources
+  become: yes
+  command: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+- name: install Docker
+  apt: name=docker-ce state=present
+
+- name: executing the Docker Command Without Sudo (Optional)
+  command: sudo usermod -aG docker "{{ owner }}"
+
+- name: start Docker
+  service:
+    name: docker
+    state: started

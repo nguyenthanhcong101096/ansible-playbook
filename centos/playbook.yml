@@ -1,0 +1,8 @@
+---
+- hosts: web
+  remote_user: app
+  become: yes
+  vars:
+    - demo: /home
+  roles:
+    - common
