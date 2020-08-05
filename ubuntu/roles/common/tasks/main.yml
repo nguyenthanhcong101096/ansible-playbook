@@ -4,5 +4,5 @@
 # - import_tasks: redis.yml
 # - import_tasks: ruby.yml
 # - import_tasks: postgres.yml
-# - import_tasks: user.yml
-  - import_tasks: docker.yml
+  - import_tasks: user.yml
+  # - import_tasks: docker.yml

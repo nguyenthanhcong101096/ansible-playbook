@@ -10,17 +10,14 @@
     state: present
     shell:  /bin/bash
 
-  # TODO: cannot create password for user
-- name: update user password
-  become: yes
-  user:
-    name: "{{ owner }}"
-    password: "{{ password }}"
+- name: allow {{ owner  }} to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    line: '"{{ owner  }}" ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
 
-  # TODO: if you want to disable password
-  # echo "app ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-- name: modify full permission user
-  lineinfile: line='"{{ owner }}" ALL=(ALL:ALL) ALL' dest=/etc/sudoers
+# - name: modify full permission user
+#   lineinfile: line='"{{ owner }}" ALL=(ALL:ALL) ALL' dest=/etc/sudoers
 
 - name: create folder .ssh
   file: path="{{ working_dir }}/.ssh" state=directory
