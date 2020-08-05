@@ -1,3 +1,7 @@
 ---
   rbenv_root: /home/app/.rbenv
   ruby_version: 2.7.1
+
+  pg_database_name: example
+  pg_database_user: root
+  pg_database_pass: password
