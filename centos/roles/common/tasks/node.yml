@@ -1,9 +1,9 @@
 ---
 - name: curl node
-  shell: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  shell: curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
 
 - name: install node
-  apt: name=nodejs
+  yum: name=nodejs
   
 - name: install yarn
   npm: name=yarn global=yes

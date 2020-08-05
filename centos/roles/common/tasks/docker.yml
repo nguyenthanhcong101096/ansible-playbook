@@ -1,12 +1,12 @@
 ---
 - name: upgrade all packages to the latest version
-  apt: name="*" state=latest
+  yum: name="*" state=latest
 
 - name: install the software-properties-common Package
-  apt: name=software-properties-common state=present
+  yum: name=software-properties-common state=present
 
 - name: install a few prerequisite packages 
-  apt: name={{ item }} state=present
+  yum: name={{ item }} state=present
   with_items:
     - apt-transport-https
     - ca-certificates

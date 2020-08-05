@@ -11,20 +11,20 @@
     filename: 'kubernetes'
 
 - name: upgrade all packages to the latest version
-  apt: name="*" state=latest
+  yum: name="*" state=latest
   
 - name: install kubelet
-  apt:
+  yum:
     name: kubelet
     state: present
 
 - name: install kubeadm
-  apt:
+  yum:
     name: kubeadm
     state: present
 
 - name: install kubectl
-  apt:
+  yum:
     name: kubectl
     state: present
     force: yes

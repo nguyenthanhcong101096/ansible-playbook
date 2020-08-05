@@ -1,6 +1,11 @@
 ---
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
 - name: install redis
-  apt: name=redis state=latest
+  yum: name=redis state=latest
 
 - name: start and enable redis
   service:

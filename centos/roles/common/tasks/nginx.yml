@@ -1,9 +1,9 @@
 ---
 - name: install nginx
-  apt: name=nginx state=present
+  yum: name=nginx state=present
 
 - name: copy file config nginx
   copy: src=templates/nginx/default.conf.example dest=/etc/nginx/conf.d
 
 - name: start nginx
-  command: service nginx start
+  command: systemctl start nginx
