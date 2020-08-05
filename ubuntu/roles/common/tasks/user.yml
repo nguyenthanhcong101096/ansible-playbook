@@ -10,10 +10,16 @@
     state: present
     shell:  /bin/bash
 
-- name: update password user {{ owner }}
-  command: echo -e "password\npassword" |  sudo passwd {{owner}}
+  # TODO: cannot create password for user
+- name: update user password
+  become: yes
+  user:
+    name: "{{ owner }}"
+    password: "{{ password }}"
 
-- name: modify permission user
+  # TODO: if you want to disable password
+  # echo "app ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+- name: modify full permission user
   lineinfile: line='"{{ owner }}" ALL=(ALL:ALL) ALL' dest=/etc/sudoers
 
 - name: create folder .ssh
@@ -24,7 +30,7 @@
     user: "{{ owner }}"
     state: present
     key: '{{ lookup("file", "{{ my_ssh }}/id_rsa.pub") }}'
-    path: "{{ ssh_dir }}/authorized_keys"
+    path: "{{ working_dir }}/.ssh/authorized_keys"
 
 - name: create file bash_profile
   file:

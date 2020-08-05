@@ -4,8 +4,9 @@
 
   #common
   working_dir: /home/ec2
-  group_user: ec2
-  owner_user: ec2
+  group: ec2
+  owner: ec2
+  password: password
 
   #ruby
   rbenv_root: /home/ec2/.rbenv
