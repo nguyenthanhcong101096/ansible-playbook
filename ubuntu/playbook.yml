@@ -3,8 +3,6 @@
   remote_user: app
   become: yes
   vars:
-    - working_dir: /home/app
-    - owner: app
-    - group: app
+    - demo: /home
   roles:
     - common

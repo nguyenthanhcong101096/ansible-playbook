@@ -1,0 +1,44 @@
+---
+- name: create group {{ group }}
+  group:
+    name: "{{ group }}"
+    state: present
+
+- name: create user {{ owner }}
+  user:
+    name: "{{ owner }}"
+    state: present
+    shell:  /bin/bash
+
+- name: update password user {{ owner }}
+  command: echo -e "password\npassword" |  sudo passwd {{owner}}
+
+- name: modify permission user
+  lineinfile: line='"{{ owner }}" ALL=(ALL:ALL) ALL' dest=/etc/sudoers
+
+- name: create folder .ssh
+  file: path="{{ working_dir }}/.ssh" state=directory
+
+- name: setup ssh
+  authorized_key:
+    user: "{{ owner }}"
+    state: present
+    key: '{{ lookup("file", "{{ my_ssh }}/id_rsa.pub") }}'
+    path: "{{ ssh_dir }}/authorized_keys"
+
+- name: create file bash_profile
+  file:
+    path: "{{ working_dir }}/.bash_profile"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: 0644
+    state: touch
+
+- name: setup .bash_profile
+  blockinfile:
+    dest: "{{ working_dir }}/.bash_profile"
+    insertbefore: BOF
+    block: |
+      if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+      fi
