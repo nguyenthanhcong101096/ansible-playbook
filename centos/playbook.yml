@@ -1,6 +1,6 @@
 ---
-- hosts: web
-  remote_user: app
+- hosts: digital
+  remote_user: root
   become: yes
   vars:
     - demo: /home

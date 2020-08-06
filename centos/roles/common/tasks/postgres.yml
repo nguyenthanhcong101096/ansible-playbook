@@ -1,21 +1,15 @@
 ---
 - name: install lib for postgres
-  apt: name={{ item }} state=latest
+  yum: name={{ item }} state=latest
   with_items:
-    - postgresql 
+    - postgresql
     - postgresql-contrib
-    - python-psycopg2
-    - python
-    - libpq-dev
+    - postgresql-server
 
 - name: enable and start postgresql
   service:
     name: postgresql
     state: started
-    enabled: yes
-
-- name: install acl
-  apt: name=acl state=present
 
 - name: create database
   become_user: postgres

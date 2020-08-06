@@ -4,6 +4,6 @@
 
 - name: install node
   yum: name=nodejs
-  
+
 - name: install yarn
   npm: name=yarn global=yes

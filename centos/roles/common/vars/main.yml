@@ -1,7 +1,7 @@
 ---
   #machine
-  my_ssh: /Users/mfv-computer-0027/.ssh
-  my_kube: /Users/mfv-computer-0027/.kube
+  my_ssh: /Users/mac/.ssh
+  my_kube: /Users/mac/.kube
 
   #common
   working_dir: /home/ec2
