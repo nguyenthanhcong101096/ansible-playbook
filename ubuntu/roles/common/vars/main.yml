@@ -1,16 +1,16 @@
 ---
   #machine
-  my_ssh: /Users/mfv-computer-0027/.ssh
-  my_kube: /Users/mfv-computer-0027/.kube
+  my_ssh: /Users/mac/.ssh
+  my_kube: /Users/mac/.kube
 
   #common
-  working_dir: /home/ec2
-  group: ec2
-  owner: ec2
+  working_dir: /home/master
+  group: master
+  owner: master
   password: password
 
   #ruby
-  rbenv_root: /home/ec2/.rbenv
+  rbenv_root: /home/master/.rbenv
   ruby_version: 2.7.1
 
   #postgres

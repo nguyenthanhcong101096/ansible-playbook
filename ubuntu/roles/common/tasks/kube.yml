@@ -12,7 +12,7 @@
 
 - name: upgrade all packages to the latest version
   apt: name="*" state=latest
-  
+
 - name: install kubelet
   apt:
     name: kubelet
@@ -29,11 +29,12 @@
     state: present
     force: yes
 
-- name: create .kube directory
-  file:
-    path: "{{ working_dir }}/.kube"
-    state: directory
-    mode: 0755
+# Only run in docker image
+# - name: create .kube directory
+#   file:
+#     path: "{{ working_dir }}/.kube"
+#     state: directory
+#     mode: 0755
 
-- name: copy file config kube
-  copy: src=templates/kube/config dest="{{ working_dir }}/.kube"
+# - name: copy file config kube
+#   copy: src=templates/kube/config dest="{{ working_dir }}/.kube"
