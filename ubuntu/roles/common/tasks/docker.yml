@@ -1,4 +1,9 @@
 ---
+#
+# THAM KHAO https://cuongquach.com/cai-dat-kubernetes-cluster-voi-kubeadm.html
+# THAM KHAO https://www.digitalocean.com/community/tutorials/how-to-create-a-kubernetes-cluster-using-kubeadm-on-ubuntu-18-04
+#
+
 - name: upgrade all packages to the latest version
   apt: name="*" state=latest
 
@@ -10,6 +15,11 @@
   with_items:
     - apt-transport-https
     - ca-certificates
+    - gnupg-agent
+    - ebtables
+    - ethtool
+    - apt-transport-https
+    - curl
 
 - name: add the GPG key for the official Docker
   shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -23,6 +33,9 @@
 
 - name: executing the Docker Command Without Sudo (Optional)
   command: sudo usermod -aG docker "{{ owner }}"
+
+- name: copy file daemon.json
+  copy: src=templates/docker/daemon.json dest=/etc/docker
 
 - name: start Docker
   service:

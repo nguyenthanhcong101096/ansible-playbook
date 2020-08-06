@@ -1,4 +1,20 @@
 ---
+#
+# THAM KHAO https://cuongquach.com/cai-dat-kubernetes-cluster-voi-kubeadm.html
+# THAM KHAO https://www.digitalocean.com/community/tutorials/how-to-create-a-kubernetes-cluster-using-kubeadm-on-ubuntu-18-04
+#
+
+- name: copy file k8s.config interaction with bridge
+  copy: src=files/k8s.conf dest=/etc/sysctl.d
+
+- name: install a few prerequisite packages
+  apt: name={{ item }} state=present
+  with_items:
+    - ebtables
+    - ethtool
+    - apt-transport-https
+    - curl
+
 - name: add Kubernetes apt-key
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -13,28 +29,12 @@
 - name: upgrade all packages to the latest version
   apt: name="*" state=latest
 
-- name: install kubelet
-  apt:
-    name: kubelet
-    state: present
+- name: install kubelet kubeadm kubectl
+  apt: name={{ item }} state=present
+  with_items:
+    - kubelet
+    - kubelet
+    - kubeadm
 
-- name: install kubeadm
-  apt:
-    name: kubeadm
-    state: present
-
-- name: install kubectl
-  apt:
-    name: kubectl
-    state: present
-    force: yes
-
-# Only run in docker image
-# - name: create .kube directory
-#   file:
-#     path: "{{ working_dir }}/.kube"
-#     state: directory
-#     mode: 0755
-
-# - name: copy file config kube
-#   copy: src=templates/kube/config dest="{{ working_dir }}/.kube"
+- name: hold kubelet kubeadm kubectl
+  command: apt-mark hold kubelet kubeadm kubectl
