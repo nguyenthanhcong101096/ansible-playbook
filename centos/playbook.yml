@@ -1,6 +1,6 @@
 ---
-- hosts: digital
-  remote_user: root
+- hosts: docker
+  remote_user: app
   become: yes
   vars:
     - demo: /home

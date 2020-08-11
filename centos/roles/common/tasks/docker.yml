@@ -9,13 +9,17 @@
     - yum-utils
     - device-mapper-persistent-data
     - lvm2
-    - ca-certificates
+    - yum-utils
     - ebtables
     - ethtool
     - curl
 
 - name: app repo
   shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: upgrade all packages
+  yum:
+    name: '*'
 
 - name: install Docker
   yum: name=docker-ce-3:19.03 state=latest
